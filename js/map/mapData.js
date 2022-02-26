@@ -45,10 +45,24 @@ var mapData = {
                 var MMSI = "416003516"; //**測試資料 屆時替換
                 
                 var shipInfoPointHtml = "<h3>基本資料</h3><div class=\"data-group\">";
+
+                var shipMainInfoPointHtml = "";
                 axios.get(mapData.data.Api.shipDataUrl + MMSI)
                 .then( function(response){
                     mapData.data.apiReturnData = response.data;
                     //console.log(response.data);
+                    shipMainInfoPointHtml += "<div class=\"data-group on\">";
+                    shipMainInfoPointHtml += "<div class=\"txt-group\"><h4>漁船編號</h4><p><span>"+mapData.data.apiReturnData.ShipCTNumber+"</span></p></div>";
+                    shipMainInfoPointHtml += "<div class=\"txt-group\"><h4>中文船名</h4><p><span>"+mapData.data.apiReturnData.ShipCname+"</span></p></div>";
+                    shipMainInfoPointHtml += "<div class=\"txt-group\"><h4>漁船別</h4><p><span>"+mapData.data.apiReturnData.ShipType+"</span></p></div>";
+                    shipMainInfoPointHtml += "<div class=\"txt-group\"><h4>所屬漁會</h4><p><span>"+mapData.data.apiReturnData.ShipFisherClub+"</span></p></div>";
+                    shipMainInfoPointHtml += "<div class=\"txt-group\"><h4>主漁業經營種類</h4><p><span>"+mapData.data.apiReturnData.MainFishingType+"</span></p></div>";
+                    shipMainInfoPointHtml += "<div class=\"txt-group\"><h4>主漁業經營種類</h4><p><span>"+mapData.data.apiReturnData.MainFishingType+"</span></p></div>";
+                    shipMainInfoPointHtml += "<div class=\"txt-group\"><h4>總噸位</h4><p><span>"+mapData.data.apiReturnData.ShipGrossTon+"</span></p></div>";
+                    shipMainInfoPointHtml += "</div>";
+
+                    document.getElementById('shipMainInfoPoint').innerHTML = shipMainInfoPointHtml;  
+
                     shipInfoPointHtml += "<div class=\"txt-group\"><h4>漁船編號</h4><p><span>"+mapData.data.apiReturnData.ShipCTNumber+"</span></p></div>";
                     shipInfoPointHtml += "<div class=\"txt-group\"><h4>漁船執照有效期限</h4><p><span>"+mapData.data.apiReturnData.LicenseValidityPeriod+"</span></p></div>";
                     shipInfoPointHtml += "<div class=\"txt-group\"><h4>中文船名</h4><p><span>"+mapData.data.apiReturnData.ShipCname+"</span></p></div>";
@@ -86,7 +100,7 @@ var mapData = {
                     shipInfoPointHtml += "<div class=\"txt-group\"><h4>船舶識別碼</h4><p><span>"+mapData.data.apiReturnData.MmsiNo+"</span></p></div>";
                     shipInfoPointHtml += "<div class=\"txt-group\"><h4>IMO識別碼</h4><p><span>"+mapData.data.apiReturnData.ImoNo+"</span></p></div></div>";  
                     document.getElementById('shipInfoPoint').innerHTML = shipInfoPointHtml;  
-                    mapData.methods.features1.getShipDetailData()                                                        
+                    mapData.methods.features1.getShipDetailData();                                      
                 })
                  .catch( function(error){
 
@@ -109,7 +123,20 @@ var mapData = {
                  shipTravelerPointHtml += "<div class=\"txt-group\"><h4>深度</h4><p><span>"+mapData.data.apiReturnData.ShipDep+"</span></p></div></div>";               
               
                  document.getElementById('shipTravelerPoint').innerHTML = shipTravelerPointHtml;  
-                 mapData.methods.features1.getShipInOutPointData();          
+                 mapData.methods.features1.getshipMembersData();          
+            },
+            getshipMembersData:function(){
+                //API回傳 船員資料
+                var shipMembersHtml = "<table class=\"siitech-table\" style=\"width: 1200px; margin: 0;\">";
+                shipMembersHtml += "<tbody>";
+                shipMembersHtml += "<tr><th>中文姓名(英文姓名)</th><th>身分證字號(護照號碼)</th><th>手冊有效日期</th><th>職務別</th><th>船員手冊編號</th><th>任事日期</th><th>卸事日期</th><th>電話</th><th>手機號碼欄位</th><th>地址(國籍)</th></tr>";
+                shipMembersHtml += "<tr><td>"+mapData.data.apiReturnData.Name+"</td><td>"+mapData.data.apiReturnData.ID+"</td><td>"+mapData.data.apiReturnData.ExpirationDate+"</td><td>"+mapData.data.apiReturnData.Position+"</td><td>"+mapData.data.apiReturnData.ManualID+"</td><td>"+mapData.data.apiReturnData.AppDate+"</td><td>"+mapData.data.apiReturnData.DisDate+"</td><td>"+mapData.data.apiReturnData.Phone+"</td><td>"+mapData.data.apiReturnData.MobilePhone+"</td><td>"+mapData.data.apiReturnData.Address+"</td></tr>";
+                shipMembersHtml += "</tbody>";
+                shipMembersHtml += "</table>";
+
+                document.getElementById('shipMembersDiv').innerHTML = shipMembersHtml;
+
+                mapData.methods.features1.getShipInOutPointData();
             },               
             getShipInOutPointData : function(){ //賦予進出港資訊          
             var data = {CTNumber : mapData.data.apiReturnData.ShipCTNumber};  //API三個參數由此替換
@@ -198,6 +225,7 @@ var mapData = {
                    shipInOutPointHtml += '<div class="box-15">發生時間 </div>'
                    shipInOutPointHtml += '<div class="box-15">港口代碼</div>'
                    shipInOutPointHtml += '<div class="box-15">事件</div>';
+                   shipInOutPointHtml += '<div class="box-15">MMSI</div>';
                    shipInOutPointHtml += '</div>';
                    shipInOutPointHtml += '</li>';
                           //console.log(results);
@@ -215,6 +243,7 @@ var mapData = {
                 shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].TimeStempTime +"</div>";
                 shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].ZoneName+"</div>";
                 shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].ConditionID1Str +"</div>";
+              //shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].MMSI+"</div>";
                 shipInOutPointHtml += '</div>';
                 shipInOutPointHtml += '</li>';
                             }                          
