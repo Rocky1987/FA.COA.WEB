@@ -95,7 +95,7 @@ var mapMain = {
 
           mapConfig.entity.featureLayer_Center = new ol.layer.Vector({
             source: new ol.source.Vector({
-            projection: 'EPSG:4326',
+            projection: 'EPSG:3857',
             // radius = 4000 meters
             features: mapMain.data.featureLayerArrCenter
             }),
@@ -119,7 +119,7 @@ var mapMain = {
 
           mapConfig.entity.featureLayer_buffer = new ol.layer.Vector({
             source: new ol.source.Vector({
-            projection: 'EPSG:4326',
+            projection: 'EPSG:3857',
             // radius = 4000 meters
             features: mapMain.data.featureLayerArrBuffer
             }),
