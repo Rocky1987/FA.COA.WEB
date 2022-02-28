@@ -354,7 +354,7 @@ var mapData = {
                 CenterLat:coords_4326Arr[1]
             },
             radius: mapMain.data.queryShipOBj.radius,  //公尺
-            FilterID : 163  //**屆時接下拉式選單的value值
+            FilterID : 4  //**屆時接下拉式選單的value值
            };
                      
                 //測試資料
