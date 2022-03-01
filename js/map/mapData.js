@@ -243,7 +243,7 @@ var mapData = {
                 shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].TimeStempTime +"</div>";
                 shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].ZoneName+"</div>";
                 shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].ConditionID1Str +"</div>";
-              //shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].MMSI+"</div>";
+                shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].MMSI+"</div>";
                 shipInOutPointHtml += '</div>';
                 shipInOutPointHtml += '</li>';
                             }                          
@@ -271,7 +271,7 @@ var mapData = {
             },
             exportCSV:function(){
                 //console.log(mapData.data.features2.InOutPortResults);
-                var csvHead = "序號,漁船統一編號,發生日期,發生時間,港口代碼,事件";
+                var csvHead = "序號,漁船統一編號,發生日期,發生時間,港口代碼,事件,MMSI";
                 var csvContent = "data:text/csv;charset=utf-8,\uFEFF";
                 csvContent += csvHead + "\r\n";
                 if(mapData.data.features2.InOutPortResults.length > 0 ){
@@ -282,6 +282,7 @@ var mapData = {
                         tempStr += mapData.data.features2.InOutPortResults[k].TimeStempTime.toString() + ",";
                         tempStr += mapData.data.features2.InOutPortResults[k].ZoneName.toString() + ",";
                         tempStr += mapData.data.features2.InOutPortResults[k].ConditionID1Str.toString() + ",";
+                        tempStr += mapData.data.features2.InOutPortResults[k].MMSI.toString() + ",";
                         csvContent += tempStr + "\r\n";
                     }
                     //console.log(csvContent);        
