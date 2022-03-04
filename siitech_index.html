@@ -142,8 +142,8 @@
 				<div class="menu-sub-box">
 					<div class="menu-sub">
 						<div class="menu-btn" id="btnPageInOutPort">進出港查詢</div>
-						<div class="menu-btn">事件查詢</div>
-						<div class="menu-btn">AIS資料下載</div>
+						<div class="menu-btn" id="btnPageAis">事件查詢</div>
+						<div class="menu-btn" id="btnPageEvent">AIS資料下載</div>
 					</div>
 				</div>
 			</div>
@@ -1025,8 +1025,180 @@
 						</div>
 					</div> -->
 				</div>
+			</div>
+		</div>
+
+		<!-- AIS資料下載 -->
+		<div class="tit position-box position-box-inout" id="pageAisData" style="display:none;">
+			<h2>
+				進出口查詢
+				<div class="btn-close">
+					<img src="img/icon_close.svg" alt="">
+				</div>
+			</h2>
+			<div class="inline-cont">
+				<div class="input-box w">
+					<label for="">船團資料</label>
+					<select name="" id="" class="select-sty">
+						<option value="">基隆船舶團</option>
+						<option value="">台北船舶團</option>
+						<option value="">高雄港</option>
+					</select>
+				</div>
+				<div class="input-box w">
+					<label for="">MMSI(s)</label>
+					<span>可多筆查詢，使用逗號或分號分隔</span>
+					<textarea name="" id="" class="input-sty desc-info"></textarea>
+				</div>
+				
+				<div class="btn-group">
+					<div></div>
+					<div class="right-bt">
+						<div class="btn btn-submit">查詢</div>
+					</div>
+				</div>
+				<!-- AIS資料查詢結果 -->
+				<div class="in-out-result" style="display: ;">
+					<h3>查詢結果</h3>
+					<div class="table-scroll" style="margin: 0 0 8px;">
+						<table class="siitech-table" style="width: 1700px; margin: 0;">
+							<tbody>
+								<tr>
+									<th>NavigationalStatus</th>
+									<th>ROT</th>
+									<th>SOG</th>
+									<th>Longitude</th>
+									<th>Latitude</th>
+									<th>COG</th>
+									<th>TrueHeading</th>
+									<th>MMSI</th>
+									<th>LocalRecvTime</th>
+									<th>IMO</th>
+									<th>CallSign</th>
+									<th>Name</th>
+									<th>ShipType</th>
+									<th>MaxDraught</th>
+									<th>Destination</th>
+									<th>GT</th>
+									<th>Draught</th>
+									<th>PortOfArrival</th>
+									<th>DangerCode</th>
+									<th>InsuranceStatus</th>
+								</tr>
+								<tr>
+									<td>NavigationalStatus</td>
+									<td>ROT</td>
+									<td>SOG</td>
+									<td>Longitude</td>
+									<td>Latitude</td>
+									<td>COG</td>
+									<td>TrueHeading</td>
+									<td>MMSI</td>
+									<td>LocalRecvTime</td>
+									<td>IMO</td>
+									<td>CallSign</td>
+									<td>Name</td>
+									<td>ShipType</td>
+									<td>MaxDraught</td>
+									<td>Destination</td>
+									<td>GT</td>
+									<td>Draught</td>
+									<td>PortOfArrival</td>
+									<td>DangerCode</td>
+									<td>InsuranceStatus</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="btn-group">
+						<div></div>
+						<div class="right-bt">
+							<div class="btn btn-submit">匯出報表</div>
+						</div>
+					</div>
+				</div>
 
 				
+			</div>
+		</div>
+		
+		<!-- 事件查詢 -->
+		<div class="tit position-box position-box-inout" id="pageEventData" style="display:none;">
+			<h2>
+				事件查詢
+				<div class="btn-close">
+					<img src="img/icon_close.svg" alt="">
+				</div>
+			</h2>
+			<div class="inline-cont">
+				<div class="input-box w" id="">
+					<label for="">事件訊息</label>
+					<input type="text" class="input-sty" name="" id="" value="">
+				</div>
+				<div class="input-box w" id="">
+					<label for="">關鍵字</label>
+					<input type="text" class="input-sty" name="" id="" value="">
+				</div>
+				<div class="input-box icon-right" id="dateStartUI2">
+					<label for="dateStart2">開始日期</label>
+					<input type="text" class="input-sty required datepicker-here" autocomplete="off" name="dateStart2" id="dateStart2" value="">
+					<i class="fad fa-calendar-alt"></i>
+				</div>
+				<div class="input-box icon-right" id="dateEndUI2">
+					<label for="dateEnd2">結束日期</label>
+					<input type="text" class="input-sty required datepicker-here" autocomplete="off" name="dateEnd2" id="dateEnd2" value="">
+					<i class="fad fa-calendar-alt"></i>
+				</div>
+				<div class="btn-group">
+					<div></div>
+					<div class="right-bt">
+						<div class="btn btn-submit">查詢</div>
+					</div>
+				</div>
+				<!-- 事件查詢查詢結果 -->
+				<div class="in-out-result" style="display: ;">
+					<h3>查詢結果</h3>
+					<div class="table-scroll" style="margin: 0 0 8px;">
+						<table class="siitech-table" style="width: 1400px; margin: 0;">
+							<tbody>
+								<tr>
+									<th>時間</th>
+									<th>優先</th>
+									<th>條件</th>
+									<th>訊息</th>
+									<th>區域</th>
+									<th>MMSI</th>
+									<th>名稱</th>
+									<th>形式</th>
+									<th>呼號</th>
+									<th>緯度</th>
+									<th>經度</th>
+									<th>信息</th>
+								</tr>
+								<tr>
+									<td>2022-02-21 14:39</td>
+									<td>低</td>
+									<td>在區域中</td>
+									<td>小琉球測試</td>
+									<td>小琉球港口</td>
+									<td>416004609</td>
+									<td>GUO DA 18</td>
+									<td>釣魚</td>
+									<td>00</td>
+									<td>22°21,116'N</td>
+									<td>120°23,156'E</td>
+									<td>信息信息信息</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="btn-group">
+						<div></div>
+						<div class="right-bt">
+							<div class="btn btn-submit">匯出報表</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -1377,9 +1549,11 @@
 					<h3>船員名單</h3>
 					<div class="data-group">
 						<div class="table-scroll" style="margin: 0 0 8px;" id="shipMembersDiv">
-							<table class="siitech-table" style="width: 1200px; margin: 0;">
+							<table class="siitech-table" style="width: 1500px; margin: 0;">
 								<tbody>
 									<tr>
+										<th>船長</th>
+										<th>作業海域</th>
 										<th>中文姓名(英文姓名)</th>
 										<th>身分證字號(護照號碼)</th>
 										<th>手冊有效日期</th>
@@ -1392,6 +1566,8 @@
 										<th>地址(國籍)</th>
 									</tr>
 									<tr>
+										<td>船長</td>
+										<td>作業海域</td>
 										<td>劉重工</td>
 										<td>F123456789</td>
 										<td>2020-01-01</td>

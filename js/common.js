@@ -299,6 +299,8 @@ $(function () {
     var inOutPageStatus = 0;
     $("#btnPageInOutPort").on("click", function () {
         $("#pageInOutPort").show();
+        $("#pageAisData").hide();
+        $("#pageEventData").hide();
     });
     // $("#btnPageInOutPort").on("click", function () {
     //     if ($(this).find("input").prop("checked") === true) {
@@ -307,6 +309,18 @@ $(function () {
     //         $("#pageInOutPort").hide();
     //     }
     // });
+    //開啟AIS資料下載
+    $("#btnPageAis").on("click", function () {
+        $("#pageAisData").show();
+        $("#pageInOutPort").hide();
+        $("#pageEventData").hide();
+    });
+    //事件查詢
+    $("#btnPageEvent").on("click", function () {
+        $("#pageEventData").show();
+        $("#pageInOutPort").hide();
+        $("#pageAisData").hide();
+    });
 
 
 

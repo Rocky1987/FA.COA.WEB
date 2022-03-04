@@ -1,6 +1,6 @@
 
      //defs //定義proj4套件協助座標轉換
-     proj4.defs([
+    proj4.defs([
         [
             'EPSG:4326',
             '+title=WGS84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees'],
@@ -12,9 +12,8 @@
             'EPSG:3828',
             '+title=TWD67 TM2 +proj=tmerc +lat_0=0 +lon_0=121 +k=0.9999 +x_0=250000 +y_0=0 +ellps=aust_SA +towgs84=-752,-358,-179,-0.0000011698,0.0000018398,0.0000009822,0.00002329 +units=m +no_defs'
         ]
-      ]);
-      
-  
+    ]);
+
     //EPSG
     var EPSG3826 = new proj4.Proj('EPSG:3826'); //TWD97 TM2(121分帶)
     var EPSG3828 = new proj4.Proj('EPSG:3828'); //TWD67 TM2(121分帶)
@@ -102,35 +101,35 @@ var mapData = {
                     document.getElementById('shipInfoPoint').innerHTML = shipInfoPointHtml;  
                     mapData.methods.features1.getShipDetailData();                                      
                 })
-                 .catch( function(error){
+                .catch( function(error){
 
-                 });                           
+                });                           
             },  
             getShipDetailData:function(){                            
-                 //API回傳 船體資料由此指定
-                 //8跟9 為ratio button  待API回來看資料內容
-                 var shipTravelerPointHtml = "<h3>船體資料</h3><div class=\"data-group\">";
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>總噸位</h4><p><span>"+mapData.data.apiReturnData.ShipGrossTon+"</span></p></div>";
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>通常航速</h4><p><span>"+mapData.data.apiReturnData.AvgSpeed+"</span></p></div>";
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>凈噸位</h4><p><span>"+mapData.data.apiReturnData.ShipNetTon+"</span></p></div>";
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>最大航速</h4><p><span>"+mapData.data.apiReturnData.MaxSpeed+"</span></p></div>";
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>全長</h4><p><span>"+mapData.data.apiReturnData.ShipLenOA+"</span></p></div>";                
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>平均吃水</h4><p><span>"+mapData.data.apiReturnData.AvgDraft+"</span></p></div>";
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>法長</h4><p><span>"+mapData.data.apiReturnData.ShipLen+"</span></p></div>";
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>船長</h4><p><span>"+mapData.data.apiReturnData.ShipLenBP+"</span></p></div>";
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>載重噸位</h4><p><span>"+mapData.data.apiReturnData.ShipDwt+"</span></p></div>";
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>寬度</h4><p><span>"+mapData.data.apiReturnData.ShipBre+"</span></p></div>";
-                 shipTravelerPointHtml += "<div class=\"txt-group\"><h4>深度</h4><p><span>"+mapData.data.apiReturnData.ShipDep+"</span></p></div></div>";               
-              
-                 document.getElementById('shipTravelerPoint').innerHTML = shipTravelerPointHtml;  
-                 mapData.methods.features1.getshipMembersData();          
+                //API回傳 船體資料由此指定
+                //8跟9 為ratio button  待API回來看資料內容
+                var shipTravelerPointHtml = "<h3>船體資料</h3><div class=\"data-group\">";
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>總噸位</h4><p><span>"+mapData.data.apiReturnData.ShipGrossTon+"</span></p></div>";
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>通常航速</h4><p><span>"+mapData.data.apiReturnData.AvgSpeed+"</span></p></div>";
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>凈噸位</h4><p><span>"+mapData.data.apiReturnData.ShipNetTon+"</span></p></div>";
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>最大航速</h4><p><span>"+mapData.data.apiReturnData.MaxSpeed+"</span></p></div>";
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>全長</h4><p><span>"+mapData.data.apiReturnData.ShipLenOA+"</span></p></div>";                
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>平均吃水</h4><p><span>"+mapData.data.apiReturnData.AvgDraft+"</span></p></div>";
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>法長</h4><p><span>"+mapData.data.apiReturnData.ShipLen+"</span></p></div>";
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>船長</h4><p><span>"+mapData.data.apiReturnData.ShipLenBP+"</span></p></div>";
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>載重噸位</h4><p><span>"+mapData.data.apiReturnData.ShipDwt+"</span></p></div>";
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>寬度</h4><p><span>"+mapData.data.apiReturnData.ShipBre+"</span></p></div>";
+                shipTravelerPointHtml += "<div class=\"txt-group\"><h4>深度</h4><p><span>"+mapData.data.apiReturnData.ShipDep+"</span></p></div></div>";               
+            
+                document.getElementById('shipTravelerPoint').innerHTML = shipTravelerPointHtml;  
+                mapData.methods.features1.getshipMembersData();          
             },
             getshipMembersData:function(){
                 //API回傳 船員資料
-                var shipMembersHtml = "<table class=\"siitech-table\" style=\"width: 1200px; margin: 0;\">";
+                var shipMembersHtml = "<table class=\"siitech-table\" style=\"width: 1500px; margin: 0;\">";
                 shipMembersHtml += "<tbody>";
-                shipMembersHtml += "<tr><th>中文姓名(英文姓名)</th><th>身分證字號(護照號碼)</th><th>手冊有效日期</th><th>職務別</th><th>船員手冊編號</th><th>任事日期</th><th>卸事日期</th><th>電話</th><th>手機號碼欄位</th><th>地址(國籍)</th></tr>";
-                shipMembersHtml += "<tr><td>"+mapData.data.apiReturnData.Name+"</td><td>"+mapData.data.apiReturnData.ID+"</td><td>"+mapData.data.apiReturnData.ExpirationDate+"</td><td>"+mapData.data.apiReturnData.Position+"</td><td>"+mapData.data.apiReturnData.ManualID+"</td><td>"+mapData.data.apiReturnData.AppDate+"</td><td>"+mapData.data.apiReturnData.DisDate+"</td><td>"+mapData.data.apiReturnData.Phone+"</td><td>"+mapData.data.apiReturnData.MobilePhone+"</td><td>"+mapData.data.apiReturnData.Address+"</td></tr>";
+                shipMembersHtml += "<tr><th>船長</th><th>作業海域</th><th>中文姓名(英文姓名)</th><th>身分證字號(護照號碼)</th><th>手冊有效日期</th><th>職務別</th><th>船員手冊編號</th><th>任事日期</th><th>卸事日期</th><th>電話</th><th>手機號碼欄位</th><th>地址(國籍)</th></tr>";
+                shipMembersHtml += "<tr><td>船長</td><td>作業海域</td><td>"+mapData.data.apiReturnData.Name+"</td><td>"+mapData.data.apiReturnData.ID+"</td><td>"+mapData.data.apiReturnData.ExpirationDate+"</td><td>"+mapData.data.apiReturnData.Position+"</td><td>"+mapData.data.apiReturnData.ManualID+"</td><td>"+mapData.data.apiReturnData.AppDate+"</td><td>"+mapData.data.apiReturnData.DisDate+"</td><td>"+mapData.data.apiReturnData.Phone+"</td><td>"+mapData.data.apiReturnData.MobilePhone+"</td><td>"+mapData.data.apiReturnData.Address+"</td></tr>";
                 shipMembersHtml += "</tbody>";
                 shipMembersHtml += "</table>";
 
@@ -151,17 +150,17 @@ var mapData = {
 
                 var shipInOutPointHtml =  '<h3>進出港資訊</h3><div class=\"data-group\">';
                 shipInOutPointHtml += '<ul class="list">';
-               
-               shipInOutPointHtml += '<li class="title">';
-               shipInOutPointHtml += '<div class="group-box-100">';
-               shipInOutPointHtml += '<div class="box-8 txt-c">序號</div>';
-               shipInOutPointHtml += '<div class="box-25">漁船統一編號</div>';
-               shipInOutPointHtml += '<div class="box-15">發生日期</div>';
-               shipInOutPointHtml += '<div class="box-15">發生時間 </div>'
-               shipInOutPointHtml += '<div class="box-15">港口代碼</div>'
-               shipInOutPointHtml += '<div class="box-15">事件</div>';
-               shipInOutPointHtml += '</div>';
-               shipInOutPointHtml += '</li>';
+                
+                shipInOutPointHtml += '<li class="title">';
+                shipInOutPointHtml += '<div class="group-box-100">';
+                shipInOutPointHtml += '<div class="box-8 txt-c">序號</div>';
+                shipInOutPointHtml += '<div class="box-25">漁船統一編號</div>';
+                shipInOutPointHtml += '<div class="box-15">發生日期</div>';
+                shipInOutPointHtml += '<div class="box-15">發生時間 </div>'
+                shipInOutPointHtml += '<div class="box-15">港口代碼</div>'
+                shipInOutPointHtml += '<div class="box-15">事件</div>';
+                shipInOutPointHtml += '</div>';
+                shipInOutPointHtml += '</li>';
 
                 if(results.Status === 1){
                     if(results.Data.length > 0){
@@ -190,7 +189,7 @@ var mapData = {
             }).catch(function (error) {
                 console.log(error);                 
             });
-                                         
+
             },
         },
         features2:{
@@ -216,18 +215,18 @@ var mapData = {
                     var results = response.data;
                     var shipInOutPointHtml =  '<h3>進出港資訊</h3>';
                     shipInOutPointHtml += '<ul class="list">';
-                   
-                   shipInOutPointHtml += '<li class="title">';
-                   shipInOutPointHtml += '<div class="group-box-100">';
-                   shipInOutPointHtml += '<div class="box-8 txt-c">序號</div>';
-                   shipInOutPointHtml += '<div class="box-25">漁船統一編號</div>';
-                   shipInOutPointHtml += '<div class="box-15">發生日期</div>';
-                   shipInOutPointHtml += '<div class="box-15">發生時間 </div>'
-                   shipInOutPointHtml += '<div class="box-15">港口代碼</div>'
-                   shipInOutPointHtml += '<div class="box-15">事件</div>';
-                   shipInOutPointHtml += '<div class="box-15">MMSI</div>';
-                   shipInOutPointHtml += '</div>';
-                   shipInOutPointHtml += '</li>';
+                    
+                    shipInOutPointHtml += '<li class="title">';
+                    shipInOutPointHtml += '<div class="group-box-100">';
+                    shipInOutPointHtml += '<div class="box-8 txt-c">序號</div>';
+                    shipInOutPointHtml += '<div class="box-25">漁船統一編號</div>';
+                    shipInOutPointHtml += '<div class="box-15">發生日期</div>';
+                    shipInOutPointHtml += '<div class="box-15">發生時間 </div>'
+                    shipInOutPointHtml += '<div class="box-15">港口代碼</div>'
+                    shipInOutPointHtml += '<div class="box-15">事件</div>';
+                    shipInOutPointHtml += '<div class="box-15">MMSI</div>';
+                    shipInOutPointHtml += '</div>';
+                    shipInOutPointHtml += '</li>';
                           //console.log(results);
                           //儲存搜尋結果
                     mapData.data.features2.InOutPortResults = (results.Status === 1 && results.Data.length > 0) ? results.Data : [];
@@ -302,62 +301,62 @@ var mapData = {
         features3:{
             queryBufferShipCount:function(){
 
-            if(document.getElementById('seaMile').value === ""){
-                alert('請輸入半徑(單位:海哩)');
-                return;
-            }  
-            //console.log(mapMain.queryShipOBj.radius);
-            if(mapMain.data.queryShipOBj.radius <= 0){
-                alert('請點擊欲查詢範圍');
-                return;
-            } 
+                if(document.getElementById('seaMile').value === ""){
+                    alert('請輸入半徑(單位:海哩)');
+                    return;
+                }  
+                //console.log(mapMain.queryShipOBj.radius);
+                if(mapMain.data.queryShipOBj.radius <= 0){
+                    alert('請點擊欲查詢範圍');
+                    return;
+                } 
 
-            if(isNaN(document.getElementById('seaMile').value)){
-                alert('請輸入數字');
-                return;
-            }         
+                if(isNaN(document.getElementById('seaMile').value)){
+                    alert('請輸入數字');
+                    return;
+                }         
 
-            if((parseFloat(document.getElementById('seaMile').value) * 1852) !== mapMain.data.queryShipOBj.radius){
-                alert("輸入半徑與地圖半徑不符，請重新輸入");
-                return;
-            }
+                if((parseFloat(document.getElementById('seaMile').value) * 1852) !== mapMain.data.queryShipOBj.radius){
+                    alert("輸入半徑與地圖半徑不符，請重新輸入");
+                    return;
+                }
 
-            //3857 --> 4326
-            var coords_4326Arr = ol.proj.transform(mapMain.data.queryShipOBj.circleCenter_3857,"EPSG:3857","EPSG:4326");
-            //4326 -->3826(WGS84經緯度轉TWD97 TM2)
-            var coords_3826Arr = proj4(EPSG4326, EPSG3826, coords_4326Arr); 
+                //3857 --> 4326
+                var coords_4326Arr = ol.proj.transform(mapMain.data.queryShipOBj.circleCenter_3857,"EPSG:3857","EPSG:4326");
+                //4326 -->3826(WGS84經緯度轉TWD97 TM2)
+                var coords_3826Arr = proj4(EPSG4326, EPSG3826, coords_4326Arr); 
 
-                 //製作3826矩形
-           var Rectangle_3826 = {
-            maxX:coords_3826Arr[0] + mapMain.data.queryShipOBj.radius,        
-            maxY:coords_3826Arr[1] + mapMain.data.queryShipOBj.radius,
-            minX:coords_3826Arr[0] - mapMain.data.queryShipOBj.radius,
-            minY:coords_3826Arr[1] - mapMain.data.queryShipOBj.radius
-           }; 
-           
-           var Max4326Arr = proj4(EPSG3826, EPSG4326, [Rectangle_3826.maxX, Rectangle_3826.maxY]);
-           //console.log(a);
-           var Min4326Arr = proj4(EPSG3826, EPSG4326, [Rectangle_3826.minX, Rectangle_3826.minY]);
-           //console.log(b);
-           //製作4326矩形
-           var bufferRectangle_4326 = {
-            MaxLonX:Max4326Arr[0],
-            MaxLatY:Max4326Arr[1],
-            MinLonX:Min4326Arr[0],        
-            MinLatY:Min4326Arr[1]
-           };
+                    //製作3826矩形
+                var Rectangle_3826 = {
+                    maxX:coords_3826Arr[0] + mapMain.data.queryShipOBj.radius,        
+                    maxY:coords_3826Arr[1] + mapMain.data.queryShipOBj.radius,
+                    minX:coords_3826Arr[0] - mapMain.data.queryShipOBj.radius,
+                    minY:coords_3826Arr[1] - mapMain.data.queryShipOBj.radius
+                }; 
 
-           //正式資料
-           var data = {
-            BufferRectangle : bufferRectangle_4326,
-            BufferCenter: {
-                CenterLon:coords_4326Arr[0],
-                CenterLat:coords_4326Arr[1]
-            },
-            radius: mapMain.data.queryShipOBj.radius,  //公尺
-            FilterID : 4  //**屆時接下拉式選單的value值
-           };
-                     
+                var Max4326Arr = proj4(EPSG3826, EPSG4326, [Rectangle_3826.maxX, Rectangle_3826.maxY]);
+                //console.log(a);
+                var Min4326Arr = proj4(EPSG3826, EPSG4326, [Rectangle_3826.minX, Rectangle_3826.minY]);
+                //console.log(b);
+                //製作4326矩形
+                var bufferRectangle_4326 = {
+                    MaxLonX:Max4326Arr[0],
+                    MaxLatY:Max4326Arr[1],
+                    MinLonX:Min4326Arr[0],        
+                    MinLatY:Min4326Arr[1]
+                };
+
+                //正式資料
+                var data = {
+                    BufferRectangle : bufferRectangle_4326,
+                    BufferCenter: {
+                        CenterLon:coords_4326Arr[0],
+                        CenterLat:coords_4326Arr[1]
+                    },
+                    radius: mapMain.data.queryShipOBj.radius,  //公尺
+                    FilterID : 4  //**屆時接下拉式選單的value值
+                };
+
                 //測試資料
                 // var data = {
                 //     BufferRectangle:{
@@ -374,49 +373,49 @@ var mapData = {
                 //     FilterID : 1
                 // };
 
-                mapData.data.calCount = 0;
-                mapData.data.calHtml = setInterval(function(){
-                 if( mapData.data.calCount % 5 === 0){
-                   document.getElementsByClassName('input-ui-res')[0].innerHTML = "計算中.";
-                 }else if( mapData.data.calCount % 5 === 1){
-                   document.getElementsByClassName('input-ui-res')[0].innerHTML = "計算中..";
-                 }else if( mapData.data.calCount % 5 === 2){
-                   document.getElementsByClassName('input-ui-res')[0].innerHTML = "計算中...";
-                 }else if( mapData.data.calCount % 5 === 3){
-                   document.getElementsByClassName('input-ui-res')[0].innerHTML = "計算中...";
-                 }else if( mapData.data.calCount % 5 === 4){
-                   document.getElementsByClassName('input-ui-res')[0].innerHTML = "計算中...";
-                 }
-                 mapData.data.calCount++;
-                }, 300);
-              
-            axios.post(
-                mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/GetShipCountData",
-                //mapData.data.Api.TestUrl + "api/FACOA/GetShipCountData",
-             {
-                "BufferRectangle": data.BufferRectangle, 
-                "BufferCenter" : data.BufferCenter,
-                "radius" : data.radius,
-                "FilterID" : data.FilterID         
-            }).then(function (response) {
-                var results = response.data;               
-                console.log(results);
-                  //恢復查詢初始狀態
-                mapData.data.calCount = 0;
-                if(mapData.data.calHtml){
-                 clearInterval(mapData.data.calHtml);
-                }
-                if(results.Status === 1){
-                    document.getElementsByClassName('input-ui-res')[0].innerHTML = "查詢結果： <i>"+results.Data+"</i> 艘";             
-                }else{
-                    alert("發生錯誤!!");
-                    document.getElementsByClassName('input-ui-res')[0].innerHTML = "查詢結果：<i>" + results.ErrorMessage +"</i>";   
-                }             
-            }).catch(function (error) {
-                console.log(error);                 
-            });
+                    mapData.data.calCount = 0;
+                    mapData.data.calHtml = setInterval(function(){
+                    if( mapData.data.calCount % 5 === 0){
+                        document.getElementsByClassName('input-ui-res')[0].innerHTML = "計算中.";
+                    }else if( mapData.data.calCount % 5 === 1){
+                        document.getElementsByClassName('input-ui-res')[0].innerHTML = "計算中..";
+                    }else if( mapData.data.calCount % 5 === 2){
+                        document.getElementsByClassName('input-ui-res')[0].innerHTML = "計算中...";
+                    }else if( mapData.data.calCount % 5 === 3){
+                        document.getElementsByClassName('input-ui-res')[0].innerHTML = "計算中...";
+                    }else if( mapData.data.calCount % 5 === 4){
+                        document.getElementsByClassName('input-ui-res')[0].innerHTML = "計算中...";
+                    }
+                    mapData.data.calCount++;
+                    }, 300);
 
-          }
+                axios.post(
+                    mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/GetShipCountData",
+                    //mapData.data.Api.TestUrl + "api/FACOA/GetShipCountData",
+                {
+                    "BufferRectangle": data.BufferRectangle, 
+                    "BufferCenter" : data.BufferCenter,
+                    "radius" : data.radius,
+                    "FilterID" : data.FilterID         
+                }).then(function (response) {
+                    var results = response.data;               
+                    console.log(results);
+                    //恢復查詢初始狀態
+                    mapData.data.calCount = 0;
+                    if(mapData.data.calHtml){
+                        clearInterval(mapData.data.calHtml);
+                    }
+                    if(results.Status === 1){
+                        document.getElementsByClassName('input-ui-res')[0].innerHTML = "查詢結果： <i>"+results.Data+"</i> 艘";             
+                    }else{
+                        alert("發生錯誤!!");
+                        document.getElementsByClassName('input-ui-res')[0].innerHTML = "查詢結果：<i>" + results.ErrorMessage +"</i>";   
+                    }             
+                }).catch(function (error) {
+                    console.log(error);                 
+                });
+
+            }
         },
     }
 };
