@@ -125,11 +125,18 @@ var mapData = {
                 mapData.methods.features1.getshipMembersData();          
             },
             getshipMembersData:function(){
+                //console.log(mapData.data.apiReturnData);
                 //API回傳 船員資料
                 var shipMembersHtml = "<table class=\"siitech-table\" style=\"width: 1500px; margin: 0;\">";
                 shipMembersHtml += "<tbody>";
-                shipMembersHtml += "<tr><th>船長</th><th>作業海域</th><th>中文姓名(英文姓名)</th><th>身分證字號(護照號碼)</th><th>手冊有效日期</th><th>職務別</th><th>船員手冊編號</th><th>任事日期</th><th>卸事日期</th><th>電話</th><th>手機號碼欄位</th><th>地址(國籍)</th></tr>";
-                shipMembersHtml += "<tr><td>船長</td><td>作業海域</td><td>"+mapData.data.apiReturnData.Name+"</td><td>"+mapData.data.apiReturnData.ID+"</td><td>"+mapData.data.apiReturnData.ExpirationDate+"</td><td>"+mapData.data.apiReturnData.Position+"</td><td>"+mapData.data.apiReturnData.ManualID+"</td><td>"+mapData.data.apiReturnData.AppDate+"</td><td>"+mapData.data.apiReturnData.DisDate+"</td><td>"+mapData.data.apiReturnData.Phone+"</td><td>"+mapData.data.apiReturnData.MobilePhone+"</td><td>"+mapData.data.apiReturnData.Address+"</td></tr>";
+                shipMembersHtml += "<tr><th>船長</th><th>作業海域</th><th>船員姓名</th><th>船員身分證字號</th><th>船員出生年月日</th><th>船員手冊編號</th><th>手冊有效日期</th><th>職務別</th><th>任事日期</th><th>卸事日期</th><th>電話</th><th>手機號碼欄位</th></tr>";
+
+                if(mapData.data.apiReturnData.CrewLists){
+                   for(var i=0; i < mapData.data.apiReturnData.CrewLists.length; i++){
+                        shipMembersHtml += "<tr><td>"+mapData.data.apiReturnData.CrewLists[i].CaptainName+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].OperationArea+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].CrewName+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].CrewId+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].CrewBirthday+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].CrewNumber+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].LicenseValidDate+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].ShipDuty+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].OnlineDate+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].OfflineDate+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].Telphone+"</td><td>"+mapData.data.apiReturnData.CrewLists[i].MobilePhone+"</td></tr>";
+                   }
+                }               
+
                 shipMembersHtml += "</tbody>";
                 shipMembersHtml += "</table>";
 
