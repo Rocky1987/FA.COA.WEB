@@ -413,7 +413,7 @@ var mapData = {
                         clearInterval(mapData.data.calHtml);
                     }
                     if(results.Status === 1){
-                        document.getElementsByClassName('input-ui-res')[0].innerHTML = "查詢結果： <i>"+results.Data+"</i> 艘";             
+                        document.getElementsByClassName('input-ui-res')[0].innerHTML = "查詢結果： <i>"+results.Data.length+"</i> 艘";             
                     }else{
                         alert("發生錯誤!!");
                         document.getElementsByClassName('input-ui-res')[0].innerHTML = "查詢結果：<i>" + results.ErrorMessage +"</i>";   
