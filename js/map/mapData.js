@@ -209,15 +209,24 @@ var mapData = {
                     ,SearchType : 2
                 };
                 
-                //console.log(searchConditionObj);
+                if(searchConditionObj.DateS != ""){
+                    searchConditionObj.DateS += " 00:00:00";
+                }
+
+                if(searchConditionObj.DateE != ""){
+                    searchConditionObj.DateE += " 23:59:59";
+                }
+
+                console.log(searchConditionObj);
                 axios.post(
                     mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/GetEventsData",
                     //mapData.data.Api.TestUrl + "api/FACOA/GetEventsData",
                 {
                     "CTNumber": searchConditionObj.CTNumber, 
-                    "DateS" : searchConditionObj.DateS + " 00:00:00",
-                    "DateE" : searchConditionObj.DateE + " 23:59:59",
-                    "SearchType" : searchConditionObj.SearchType       
+                    "ZoneName": searchConditionObj.ZoneName,
+                    "DateS" : searchConditionObj.DateS,
+                    "DateE" : searchConditionObj.DateE,
+                    "SearchType" : searchConditionObj.SearchType
                 }).then(function (response) {
                     var results = response.data;
                     var shipInOutPointHtml =  '<h3>進出港資訊</h3>';
