@@ -322,9 +322,8 @@ $(function () {
         $("#pageAisData").hide();
     });
 
-
-
-
+    //取得帳號名稱
+    console.log(getAccountName());
 });
 
 function pageShipDetial(){
@@ -350,6 +349,11 @@ function pageShipDetial(){
             console.log('1:',shipInfoPoint,'2:',shipTravelerPoint,'3:',shipInOutPoint);
         });
     });
+}
+
+function getAccountName(){
+    var accName = $('#lblUserName').text();
+    return accName;
 }
 
 

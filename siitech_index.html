@@ -201,7 +201,7 @@
 			</div>
 			<div class="user-info">
         <div class="user-id">
-            <span>AdminAdmin</span>
+            <span id="lblUserName">AdminAdmin</span>
         </div>
         <div class="user-setting">
             <a href="###">
@@ -1048,7 +1048,7 @@
 				<div class="input-box w">
 					<label for="">MMSI(s)</label>
 					<span>可多筆查詢，使用逗號或分號分隔</span>
-					<textarea name="" id="" class="input-sty desc-info"></textarea>
+					<textarea name="" id="" class="input-sty desc-info" onkeyup="this.value=this.value.replace(/[^0-9\,]/g,'');"></textarea>
 				</div>
 				
 				<div class="btn-group">
