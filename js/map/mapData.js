@@ -144,21 +144,13 @@ var mapData = {
 
                 mapData.methods.features1.getShipInOutPointData();
             },               
-            getShipInOutPointData : function(){ //賦予進出港資訊          
-            var data = {CTNumber : mapData.data.apiReturnData.ShipCTNumber};  //API三個參數由此替換
-            axios.post(
-                mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/GetEventsData", 
-                //mapData.data.Api.TestUrl + "api/FACOA/GetEventsData",
-            {
-                "CTNumber": data.CTNumber,           
-                "SearchType" : 1          
-            }).then(function (response) {
-                var results = response.data;
+            getShipInOutPointData : async function(){ //賦予進出港資訊      
+            
+            document.getElementById('shipInOutPoint').innerHTML = '';
+            let shipInOutPointHtml =  '<h3>進出港資訊</h3><div class=\"data-group\">';    
+            shipInOutPointHtml += '<ul class="list">';
 
-                var shipInOutPointHtml =  '<h3>進出港資訊</h3><div class=\"data-group\">';
-                shipInOutPointHtml += '<ul class="list">';
-                
-                shipInOutPointHtml += '<li class="title">';
+            shipInOutPointHtml += '<li class="title">';
                 shipInOutPointHtml += '<div class="group-box-100">';
                 shipInOutPointHtml += '<div class="box-8 txt-c">序號</div>';
                 shipInOutPointHtml += '<div class="box-25">漁船統一編號</div>';
@@ -169,34 +161,45 @@ var mapData = {
                 shipInOutPointHtml += '</div>';
                 shipInOutPointHtml += '</li>';
 
+            var data = {CTNumber : mapData.data.apiReturnData.ShipCTNumber};  //API三個參數由此替換
+            await axios.post(
+                mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/GetEventsData", 
+                //mapData.data.Api.TestUrl + "api/FACOA/GetEventsData",
+            {
+                "CTNumber": data.CTNumber,           
+                "SearchType" : 1          
+            }).then(function (response) {
+                var results = response.data;
+
+                var shipInOutPointHtml =  '<h3>進出港資訊</h3><div class=\"data-group\">';
+                shipInOutPointHtml += '<ul class="list">';
+                               
                 if(results.Status === 1){
                     if(results.Data.length > 0){
                         for(var i=0; i < results.Data.length; i++ ){
                             //查完的資料在這跑for loop
-            shipInOutPointHtml += '<li>';
-            shipInOutPointHtml += '<div class="group-box-100">';
-            shipInOutPointHtml += "<div class=\"box-8 txt-c\">"+(i+1).toString()+"</div>";
-            shipInOutPointHtml += "<div class=\"box-25\">"+results.Data[i].CTNo +"</div>";
-            shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].TimeStempDate +"</div>";
-            shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].TimeStempTime +"</div>";
-            shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].ZoneName+"</div>";
-            shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].ConditionID1Str +"</div>";
-            shipInOutPointHtml += '</div>';
-            shipInOutPointHtml += '</li>';
+                        shipInOutPointHtml += '<li>';
+                        shipInOutPointHtml += '<div class="group-box-100">';
+                        shipInOutPointHtml += "<div class=\"box-8 txt-c\">"+(i+1).toString()+"</div>";
+                        shipInOutPointHtml += "<div class=\"box-25\">"+results.Data[i].CTNo +"</div>";
+                        shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].TimeStempDate +"</div>";
+                        shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].TimeStempTime +"</div>";
+                        shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].ZoneName+"</div>";
+                        shipInOutPointHtml += "<div class=\"box-15\">"+results.Data[i].ConditionID1Str +"</div>";
+                        shipInOutPointHtml += '</div>';
+                        shipInOutPointHtml += '</li>';
                         }
-                    }else{
-                        alert("無進出港資訊!!");
-                    }
-                    shipInOutPointHtml += '</ul></div>';
-                    document.getElementById('shipInOutPoint').innerHTML = shipInOutPointHtml;  
+                    }                
                 }else{
-                    alert("發生錯誤!!");
+                    console.log("發生錯誤!!");
                     console.log(results.ErrorMessage);   
                 }             
             }).catch(function (error) {
                 console.log(error);                 
             });
 
+            shipInOutPointHtml += '</ul></div>';
+            document.getElementById('shipInOutPoint').innerHTML = shipInOutPointHtml;             
             },
         },
         features2:{
