@@ -236,7 +236,7 @@ var mapData = {
                     searchConditionObj.DateE += " 23:59:59";
                 }
 
-                console.log(searchConditionObj);
+                //console.log(searchConditionObj);
                 axios.post(
                     mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/GetEventsData",
                     //mapData.data.Api.TestUrl + "api/FACOA/GetEventsData",
@@ -305,9 +305,32 @@ var mapData = {
                 });
             },
             exportCSV:function(){
-                console.log(navigator.msSaveBlob);
+               
                 //console.log(mapData.data.features2.InOutPortResults);
-                var csvHead = "序號,漁船統一編號,發生日期,發生時間,港口代碼,事件,MMSI";
+
+                axios.post(
+                    mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/ExportCSVData",
+                    //mapData.data.Api.TestUrl + "api/FACOA/ExportCSVData",
+                    mapData.data.features2.InOutPortResults
+                ).then(function (response) {
+                    var results = response.data;
+                   console.log(results);
+                    if(results.Status === 1 && results.Data){
+                        var link = document.createElement("a");
+                        link.setAttribute("href", mapData.data.Api.domainName + mapData.data.Api.projectName+"/data/Csv/進出港查詢結果.csv");                      
+                        document.body.appendChild(link); // Required for FF
+    
+                        link.click(); // This will download the data file named "my_data.csv".
+                        link.remove();              
+                    }
+                    else{                      
+                        console.log(results.ErrorMessage);   
+                    }             
+                }).catch(function (error) {
+                    console.log(error);                 
+                });
+
+                /*var csvHead = "序號,漁船統一編號,發生日期,發生時間,港口代碼,事件,MMSI";
                 var csvContent = "data:text/csv;charset=utf-8,\uFEFF";
                 csvContent += csvHead + "\r\n";
                 if(mapData.data.features2.InOutPortResults.length > 0 ){
@@ -332,7 +355,7 @@ var mapData = {
                     link.remove();
                 }else{
                     alert("無查詢結果");
-                }
+                }*/
             },
         },
         features3:{
