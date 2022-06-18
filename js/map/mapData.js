@@ -41,7 +41,7 @@ var mapData = {
         features1:{             
             getShipBasicData:function(){
                 //API回傳 基本資料由此指定         
-                var MMSI = "416003516"; //**測試資料 屆時替換
+                var MMSI = "416066568"; //**測試資料 屆時替換
                 
                 var shipInfoPointHtml = "<h3>基本資料</h3><div class=\"data-group\">";
 
@@ -147,13 +147,14 @@ var mapData = {
             getShipInOutPointData :  function(){ //賦予進出港資訊      
             
             document.getElementById('shipInOutPoint').innerHTML = '';
-          
-            var data = {CTNumber : mapData.data.apiReturnData.ShipCTNumber};  //API三個參數由此替換
+                   
+            var apiMMSINO = !mapData.data.apiReturnData.MmsiNo ? " " :  mapData.data.apiReturnData.MmsiNo;
+            var data = {MmsiNo : apiMMSINO};  //API三個參數由此替換
              axios.post(
                 mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/GetEventsData", 
                 //mapData.data.Api.TestUrl + "api/FACOA/GetEventsData",
             {
-                "CTNumber": data.CTNumber,           
+                "CTNumber": data.MmsiNo,           
                 "SearchType" : 1          
             }).then(function (response) {
                 var results = response.data;
@@ -307,7 +308,6 @@ var mapData = {
             exportCSV:function(){
                
                 //console.log(mapData.data.features2.InOutPortResults);
-
                 axios.post(
                     mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/ExportCSVData",
                     //mapData.data.Api.TestUrl + "api/FACOA/ExportCSVData",
