@@ -336,7 +336,7 @@ var mapData = {
                 if(mapData.data.features2.InOutPortResults.length > 0 ){
                     for(var k = 0; k < mapData.data.features2.InOutPortResults.length; k++){
                         var tempStr = (k+1).toString() + ",";
-                        tempStr += mapData.data.features2.InOutPortResults[k].CTNumber.toString() + ",";
+                        tempStr += mapData.data.features2.InOutPortResults[k].CTNumber ? mapData.data.features2.InOutPortResults[k].CTNumber.toString() : "" + ",";
                         tempStr += mapData.data.features2.InOutPortResults[k].TimeStempDate.toString() + ",";
                         tempStr += mapData.data.features2.InOutPortResults[k].TimeStempTime.toString() + ",";
                         tempStr += mapData.data.features2.InOutPortResults[k].ZoneName.toString() + ",";
