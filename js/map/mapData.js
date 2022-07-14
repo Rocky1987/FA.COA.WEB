@@ -308,30 +308,30 @@ var mapData = {
             exportCSV:function(){
                
                 //console.log(mapData.data.features2.InOutPortResults);
-                axios.post(
-                    mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/ExportCSVData",
-                    //mapData.data.Api.TestUrl + "api/FACOA/ExportCSVData",
-                    mapData.data.features2.InOutPortResults
-                ).then(function (response) {
-                    var results = response.data;
-                   console.log(results);
-                    if(results.Status === 1 && results.Data){
-                        var link = document.createElement("a");
-                        link.setAttribute("href", mapData.data.Api.domainName + mapData.data.Api.projectName+"/data/Csv/進出港查詢結果.csv");                      
-                        document.body.appendChild(link); // Required for FF
+                // axios.post(
+                //     mapData.data.Api.domainName + mapData.data.Api.projectName + "api/FACOA/ExportCSVData",
+                //     //mapData.data.Api.TestUrl + "api/FACOA/ExportCSVData",
+                //     mapData.data.features2.InOutPortResults
+                // ).then(function (response) {
+                //     var results = response.data;
+                //    console.log(results);
+                //     if(results.Status === 1 && results.Data){
+                //         var link = document.createElement("a");
+                //         link.setAttribute("href", mapData.data.Api.domainName + mapData.data.Api.projectName+"/data/Csv/進出港查詢結果.csv");                      
+                //         document.body.appendChild(link); // Required for FF
     
-                        link.click(); // This will download the data file named "my_data.csv".
-                        link.remove();              
-                    }
-                    else{                      
-                        console.log(results.ErrorMessage);   
-                    }             
-                }).catch(function (error) {
-                    console.log(error);                 
-                });
-
-                /*var csvHead = "序號,漁船統一編號,發生日期,發生時間,港口代碼,事件,MMSI";
-                var csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+                //         link.click(); // This will download the data file named "my_data.csv".
+                //         link.remove();              
+                //     }
+                //     else{                      
+                //         console.log(results.ErrorMessage);   
+                //     }             
+                // }).catch(function (error) {
+                //     console.log(error);                 
+                // });
+                var isIEFun = typeof window.navigator.msSaveBlob === "function" ? true : false;
+                var csvHead = "序號,漁船統一編號,發生日期,發生時間,港口代碼,事件,MMSI";
+                var csvContent = isIEFun ? "" : "data:text/csv;charset=utf-8,\uFEFF";                
                 csvContent += csvHead + "\r\n";
                 if(mapData.data.features2.InOutPortResults.length > 0 ){
                     for(var k = 0; k < mapData.data.features2.InOutPortResults.length; k++){
@@ -344,18 +344,30 @@ var mapData = {
                         tempStr += mapData.data.features2.InOutPortResults[k].MMSI.toString() + ",";
                         csvContent += tempStr + "\r\n";
                     }
-                    //console.log(csvContent);        
-                    var encodedUri = encodeURI(csvContent);
-                    var link = document.createElement("a");
-                    link.setAttribute("href", encodedUri);
-                    link.setAttribute("download", "進出港查詢結果.csv");
-                    document.body.appendChild(link); // Required for FF
+                    //console.log(csvContent);                        
+                    var fileName = '進出港查詢結果.csv';
+                if (isIEFun) {
+                     var csvBlob = new Blob(["\ufeff" + csvContent], {
+                       type: "text/csv;charset=utf-8;",
+                     });
+                     window.navigator.msSaveBlob(csvBlob, fileName);
+                 }else{
+                     var encodedUri = encodeURI(csvContent);
+                     var link = document.createElement("a");
+                     link.setAttribute("href", encodedUri);
+                     link.setAttribute("download", fileName);
+                     document.body.appendChild(link); // Required for FF
 
-                    link.click(); // This will download the data file named "my_data.csv".
-                    link.remove();
+                     link.click(); // This will download the data file named "my_data.csv".
+                     link.remove();
+                 }
                 }else{
                     alert("無查詢結果");
-                }*/
+                }
+
+                
+
+
             },
         },
         features3:{
